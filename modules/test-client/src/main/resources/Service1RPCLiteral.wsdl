@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ *
+ * Copyright(C) OASIS(R) 2009,2010. All Rights Reserved.
+ * OASIS trademark, IPR and other policies apply.    
+ *   
+ * WSDL version of the Service1 interface, with RPC Literal form
+-->
+<!--
+	WSDL for the Service1 interface
+	1 operation "operation1"
+	- 1 string input parameter
+	- 1 string output parameter 
+-->
+<wsdl:definitions name="Service1ServiceJAXWS" 
+	targetNamespace="http://test.sca.oasisopen.org/" 
+	xmlns:tns="http://test.sca.oasisopen.org/" 
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <wsdl:types>
+  </wsdl:types>
+  <wsdl:message name="operation1Response">
+    <wsdl:part name="operation1Response" type="xs:string"/>
+  </wsdl:message>
+  <wsdl:message name="operation1">
+    <wsdl:part name="operation1" type="xs:string"/>
+  </wsdl:message>
+  <wsdl:portType name="Service1RPCLit">
+    <wsdl:operation name="operation1">
+      <wsdl:input message="tns:operation1"/>
+      <wsdl:output message="tns:operation1Response"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  
+  <!-- WSDL Binding and Service -->
+  <wsdl:binding name="Service1RPCLitBinding" type="tns:Service1RPCLit">
+    <!-- uses a SOAP v1.1 over HTTP transport -->
+  	<soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http" />
+  	<wsdl:operation name="operation1">
+  		<soap:operation soapAction="http://test.sca.oasisopen.org/operation1"/>
+  		<wsdl:input>
+  			<soap:body use="literal" namespace="http://test.sca.oasisopen.org/foo" />
+  		</wsdl:input>
+  		<wsdl:output>
+  			<soap:body use="literal" namespace="http://test.sca.oasisopen.org/foo" />
+  		</wsdl:output>
+  	</wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Service1ServiceRPCLit">
+  	<wsdl:port name="Service1PortRPCLit" binding="tns:Service1RPCLitBinding">
+  		<soap:address location="http://localhost:9080/JAXWS/Service1" />
+  	</wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.metaformsystems.fabric3.conformance.ws</groupId>
+        <artifactId>parent</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+    <artifactId>tests</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <name>Fabric3 SCA Web Services Binding Conformance Tests</name>
+    <packaging>pom</packaging>
+
+
+    <dependencies>
+        <dependency>
+            <groupId>org.codehaus.fabric3.spec</groupId>
+            <artifactId>sca-api</artifactId>
+            <version>${sca.api.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>3.8.1</version>
+        </dependency>
+    </dependencies>
+
+
+    <modules>
+        <module>smoketest</module>
+        <module>BWS_2001</module>
+        <module>BWS_2002</module>
+        <module>BWS_2003</module>
+        <module>BWS_2004</module>
+        <module>BWS_2005</module>
+        <module>BWS_2006</module>
+        <module>BWS_2007</module>
+        <module>BWS_2008</module>
+        <module>BWS_2009</module>
+        <module>BWS_2010</module>
+        <module>BWS_2011</module>
+        <module>BWS_2012</module>
+        <module>BWS_2013</module>
+        <module>BWS_2014</module>
+        <module>BWS_2015</module>
+        <module>BWS_2016</module>
+        <module>BWS_2017</module>
+        <module>BWS_2018</module>
+        <module>BWS_2019</module>
+        <module>BWS_2020</module>
+        <module>BWS_2021</module>
+        <module>BWS_2022</module>
+        <module>BWS_2023</module>
+        <module>BWS_4001</module>
+        <module>BWS_4002</module>
+        <module>BWS_4003</module>
+        <module>BWS_4004</module>
+        <module>BWS_4005</module>
+        <module>BWS_4006</module>
+        <module>BWS_4007</module>
+        <module>BWS_4008</module>
+        <module>BWS_5001</module>
+        <module>BWS_5002</module>
+        <module>BWS_5003</module>
+        <module>BWS_5004</module>
+        <module>BWS_5005</module>
+        <module>BWS_5006</module>
+    </modules>
+</project>

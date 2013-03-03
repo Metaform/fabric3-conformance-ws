@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ *
+ * Copyright(C) OASIS(R) 2009,2010. All Rights Reserved.
+ * OASIS trademark, IPR and other policies apply.    
+ *   
+-->
+<!--
+ Tests that where a <binding.ws/> subelement of a component <reference/> has a @wsdlElement attribute which references 
+ a Port element of a WSDL document and the Port element has an associated portType which contains an sca @callback 
+ extension attribute, but where the <reference/> interface declaration does not have a callback, that the portType 
+ is treated as being not compatible with the interface for the reference and that an error is raised.
+-->
+<!-- 
+ This test is designed so that the WSDL referenced through an @wsdlElement attribute of a binding.ws points at a WSDL
+ document where the relevant portType element has an SCA @callback attribute declared - pointing to a valid callback
+ interface.  However, the <reference/> element which is the parent of the binding.ws has an interface with no callback.
+ This testcase requires the SCA runtime to scan and interpret the @callback attribute - and to then judge that the
+ portType of the WSDL does not match the interface of the reference.  If the @callback attribute is ignored, the interfaces
+ will match and the reference will be able to invoke the target service, which is incorrect. 
+-->
+<composite xmlns="http://docs.oasis-open.org/ns/opencsa/sca/200912"
+           targetNamespace="http://docs.oasis-open.org/ns/opencsa/scatests/200903"
+           xmlns:test="http://docs.oasis-open.org/ns/opencsa/scatests/200903"
+           name="TEST_BWS_2022">
+           
+    <component name="TestClient">
+		<implementation.composite name="test:TestClient_0002"/>
+		<service name="TestInvocation">
+			<interface.wsdl interface="http://test.sca.oasisopen.org/#wsdl.porttype(TestInvocation)"/>
+            <binding.ws/>
+		</service>
+        <reference name="reference1" target="TEST_BWS_2022Component1/Service1" />
+        <property name="testName">BWS_2022</property>
+    </component>
+    
+    <!-- Component 1 -->
+    <component name="TEST_BWS_2022Component1">
+        <implementation.composite name="test:TestComposite4"/>
+        <service name="Service1">
+            <interface.wsdl interface="http://test.sca.oasisopen.org/#wsdl.porttype(Service1)"/>
+        </service>
+        <property name="serviceName">service1</property>
+        <!-- Reference uses the Service1 interface, with no callback -->
+        <reference name="Reference1">
+            <!-- binding.ws has a @wsdlElement attribute with a value that points to WSDL port element 
+                 and this element has an associated WSDL portType element which contains an sca:callback attribute -->
+        	<binding.ws wsdlElement="http://test.sca.oasisopen.org/#wsdl.port(Service1WithCallback/Service1CallbackPort)" />
+        </reference>
+    </component> 
+
+    <!-- Component 2 -->
+    <component name="TEST_BWS_2022Component2">
+        <implementation.composite name="test:TestComposite1"/>
+        <service name="Service1">
+            <interface.wsdl interface="http://test.sca.oasisopen.org/#wsdl.porttype(Service1)"/>
+            <!-- Expose using a Web service -->
+            <binding.ws/>
+        </service>
+        <property name="serviceName">service2</property>
+    </component> 
+
+</composite>
